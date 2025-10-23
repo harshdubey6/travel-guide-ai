@@ -93,7 +93,7 @@ An AI-powered travel companion designed specifically for Indian travelers, helpi
 4. **Initialize database:**
    ```bash
    npm prisma generate
-   pnpm prisma db push
+   npm prisma db push
    ```
 
 5. **Start development server:**
