@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model SuggestedTrip {
+  id          String   @id @default(cuid())
+  title       String
+  destination String
+  description String
+  highlights  String   // JSON string array of highlights
+  bestTime    String   // e.g., "March-May, September-November"
+  duration    String   // e.g., "5-7 days"
+  budget      String   // e.g., "$800-1200"
+  tripType    String   // e.g., "Adventure", "Cultural", "Relaxation"
+  region      String   // e.g., "Europe", "Asia", "North America"
+  coverImage  String?  // URL to cover image
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("suggested_trips")
+}
+
+model Itinerary {
+  id          String   @id @default(cuid())
+  destination String
+  startDate   DateTime
+  endDate     DateTime
+  budget      String
+  travelers   Int
+  interests   String   // JSON string array of interests
+  pace        String   // "relaxed", "normal", "packed"
+  mobility    String?  // mobility constraints
+  transport   String?  // preferred transport
+  content     String   // Generated itinerary content (Markdown)
+  reasoning   String   // AI reasoning trace
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("itineraries")
+}
